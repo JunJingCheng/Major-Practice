@@ -1,0 +1,50 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX program = xelatex
+
+\documentclass[forprint]{hquthesis}
+
+\begin{document}
+	
+	\title{xxx}
+	\cntitle{xxx}
+	\schoolname{\dlmu[4cm]{数学科学学院}}
+	\major{\dlmu[4cm]{数学及应用数学}}
+	\grade{\dlmu[4cm]{2023}}
+	\studentnumber{\dlmu[4cm]{2312115030}}
+	\author{\dlmu[4cm]{唐稑承}}
+	\advisor{\dlmu[4cm]{黄川波}}
+	\professionaltitle{\dlmu[4cm]{xxx} }
+	\entitle{xxx}
+	\date{xxx 年 x 月}
+	
+	\pdfbookmark[0]{封面}{title}
+	\maketitle
+	
+%	\include{promise}
+	
+	\frontmatter
+	\pagenumbering{Roman}
+	\include{includefile/frontmatter}
+	
+	\pdfbookmark[0]{目录}{toc}
+	\tableofcontents   
+	
+	\mainmatter
+	\include{body/chapter1}     
+	\include{body/chapter2}
+	\include{body/chapter3}
+	
+	\bibliographystyle{bnubib.bst}
+	\bibliography{references.bib}
+	\addcontentsline{toc}{chapter}{参考文献}
+	
+	\include{appendices}
+	
+%	\include{includefile/backmatter}
+	
+	\cleardoublepage
+
+\end{document}
+
+
+
