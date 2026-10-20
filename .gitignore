@@ -2,3 +2,18 @@ report
 templates
 *.docx
 .backup
+
+# Python-generated files
+.ipynb_checkpoints
+__pycache__
+
+# Tex-generated files
+*.aux
+*.bbl
+*.blg
+*.out
+*.pdf
+*.synctex.gz
+*.thm
+*.toc
+*.log
