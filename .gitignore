@@ -2,6 +2,7 @@ report
 templates
 *.docx
 .backup
+README.md
 
 # Python-generated files
 .ipynb_checkpoints
