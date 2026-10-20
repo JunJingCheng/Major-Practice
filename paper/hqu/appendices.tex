@@ -1,0 +1,99 @@
+\appendix
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A.\arabic{equation}}
+
+\chapter*{附录}
+\addcontentsline{toc}{chapter}{附录}
+\setcounter{chapter}{1}
+
+\def\sectionAname{数学原理}
+\section*{附录 A：\sectionAname}
+\addcontentsline{toc}{section}{附录 A：\sectionAname}
+\setcounter{section}{2}
+
+\subsection*{A.1 属性约简}
+
+\subsubsection*{决策表与不可区分关系}
+
+设决策表为 $DT=(U,C\cup D,V,f)$，其中：\(U\)：对象集合，即样本集；\(C\)：条件属性集合，即特征集；\(D\)：决策属性集合，即标签；\(V\)：属性值域；\(f:U\times(C\cup D)\to V\)：信息函数。
+
+\begin{definition}[不可区分关系]
+	设 $B\subseteq C$ 是条件属性子集，则称
+	\[
+	IND(B)=\{(x,y)\in U\times U\mid \forall a\in B,\ f(x,a)=f(y,a)\}
+	\]
+	为 $B$ 上的不可区分关系。
+\end{definition}
+
+\begin{proposition}
+	条件属性子集上的不可区分关系是等价关系。
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{notation}
+	由 \(IND(B)\) 诱导的等价类记为：$[x]_B=\{y\in U\mid (x,y)\in IND(B)\}.$ 所有等价类构成划分 $U/IND(B)=\{[x]_B\mid x\in U\}$.
+\end{notation}
+
+\subsubsection*{下近似、正域与依赖度}
+
+\begin{definition}[下近似]
+	设 $U$ 的子集 $X$, 则称 
+	\[
+	\underline{B}(X)=\{x\in U\mid [x]_B\subseteq X\}
+	\]
+	为 $X$ 关于 $B$ 的一个下近似。
+\end{definition}
+
+\begin{notation}
+	决策属性 \(D\) 将论域划分为决策类 $U/D=\{D_1,D_2,\dots,D_r\}$
+\end{notation}
+
+\begin{definition}[正域]
+	条件属性子集 \(B\) 关于决策属性 \(D\) 的正域为：
+	\[
+	POS_B(D)=\bigcup_{i=1}^{r}\underline{B}(D_i)
+	\]
+\end{definition}
+
+\begin{definition}[依赖度]
+	定义条件属性 $B$ 关于决策属性 $D$ 的依赖度为：
+	\[
+	\gamma_B(D)=\frac{|POS_B(D)|}{|U|},
+	\]
+	表示用条件属性 \(B\) 能够确定分类的对象比例。
+\end{definition}
+
+\subsubsection*{约简与核}
+
+\begin{definition}[约简]
+	称 \(R\) 为 \(C\) 相对于 \(D\) 的一个约简，若 \(R\subseteq C\) 满足 $\gamma_R(D)=\gamma_C(D)$ 且对任意 \(a\in R\)，都有  
+	\[
+	\gamma_{R\setminus\{a\}}(D)<\gamma_R(D).
+	\]
+\end{definition}
+
+\begin{definition}[核]
+	称所有约简的交集为核，记为
+	\[
+	Core(C)=\bigcap\{R\mid R\text{ 是约简}\}
+	\]
+\end{definition}
+
+\begin{proposition}
+	任取 $c\in Core(C),$ 都有 $\gamma_{C\setminus\{c\}}(D) < \gamma_C(D)$.
+\end{proposition}
+\begin{proof}
+	
+\end{proof}
+
+\subsubsection*{属性重要度}
+\begin{definition}
+	定义属性 \(a\) 相对于当前属性子集 \(R\) 的重要度为：
+	\[
+	Sig(a,R,D)=\gamma_{R\cup\{a\}}(D)-\gamma_R(D).
+	\]
+	重要度越大，说明加入属性 \(a\) 后，正域增加越多，分类能力提升越明显。
+\end{definition}
