@@ -60,7 +60,7 @@
 \end{figure}
   \begin{center}\leavevmode%标题在一行
  \begin{center}
- 	   {\heiti\zihao{0} {毕业实训}}\\
+ 	   {\heiti\zihao{0} {毕业实训（论文）}}\\
     \vspace{1.2cm}	% original: 1.8cm
 
 {\zihao{3}\begin{tabular}{rc}
@@ -86,8 +86,8 @@
     	\heiti\raisebox{-2ex}[0pt]{\makebox[3.5cm][s]{姓\hfill 名：}} & \songti{ {}\raisebox{-2ex}[0pt]{\@author}\hfill{}} & \\
     	
     	\heiti\raisebox{-2ex}[0pt]{\makebox[3.5cm][s]{指\hfill 导\hfill 老\hfill 师：}} & \songti{ {}\raisebox{-2ex}[0pt]{\the\advisor}\hfill{}} & \\
-    	
-    	\heiti\raisebox{-2ex}[0pt]{\makebox[3.5cm][s]{指\hfill 导\hfill 老\hfill 师\hfill 职\hfill 称：}} & \songti{ {}\raisebox{-2ex}[0pt]{\the\professionaltitle}\hfill{}} & \\
+%    	
+%    	\heiti\raisebox{-2ex}[0pt]{\makebox[3.5cm][s]{指\hfill 导\hfill 老\hfill 师\hfill 职\hfill 称：}} & \songti{ {}\raisebox{-2ex}[0pt]{\the\professionaltitle}\hfill{}} & \\
     \end{tabular}
     }
 \vspace{0.3cm}	% original: 0.8cm
@@ -152,7 +152,9 @@
 \RequirePackage{longtable}
 \RequirePackage{ulem}
 \RequirePackage{mathtools}
-\RequirePackage[linesnumbered,ruled,vlined]{algorithm2e}
+%\RequirePackage[linesnumbered,ruled,vlined]{algorithm2e}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
 
 \usepackage{latexsym}
 
@@ -167,18 +169,18 @@
 \theorempostskip{0pt}
 \theoremnumbering{arabic}
 %\theoremsymbol{} %定理结束时自动添加的标志
-\newtheorem{theorem}{\hspace{2em}定理}[section]
 \newtheorem{definition}{\hspace{2em}定义}[section]
-\newtheorem{lemma}{\hspace{2em}引理}[section]
-\newtheorem{corollary}{\hspace{2em}推论}[section]
-\newtheorem{proposition}{\hspace{2em}性质}[section]
-\newtheorem{example}{\hspace{2em}例}[section]
-\newtheorem{remark}{\hspace{2em}注解}[section]
-%\newtheorem{algorithm}{\hspace{2em}算法}[section]
-\newtheorem{axiom}{\hspace{2em}公理}[section]
-\newtheorem{condition}{\hspace{2em}条件}[section]
-\newtheorem{conclusion}{\hspace{2em}结论}[section]
-\newtheorem{assumption}{\hspace{2em}假设}[section]
+\newtheorem{lemma}[definition]{\hspace{2em}引理}
+\newtheorem{theorem}[definition]{\hspace{2em}定理}
+\newtheorem{corollary}[definition]{\hspace{2em}推论}
+\newtheorem{proposition}[definition]{\hspace{2em}性质}
+\newtheorem{example}[definition]{\hspace{2em}例}
+\newtheorem{remark}[definition]{\hspace{2em}注解}
+\newtheorem{axiom}[definition]{\hspace{2em}公理}
+\newtheorem{condition}[definition]{\hspace{2em}条件}
+\newtheorem{conclusion}[definition]{\hspace{2em}结论}
+\newtheorem{assumption}[definition]{\hspace{2em}假设}
+\newtheorem{notation}[definition]{\hspace{2em}记号}
 
 \theoremstyle{nonumberplain}
 \theoremheaderfont{\heiti}

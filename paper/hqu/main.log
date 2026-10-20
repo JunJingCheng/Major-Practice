@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.7.14)  12 OCT 2026 20:44
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.7.14)  14 OCT 2026 10:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -944,120 +944,94 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \xmathstrut@box=\box67
 \xmathstrut@dim=\dimen282
 )
-(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
-Invalid UTF-8 byte or sequence at line 284 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 299 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 550 replaced by U+FFFD.
-Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count353
-\algocf@hangindent=\skip98
+(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/algorithms/algorithm.sty
+Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
 
-(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
-Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count354
+(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count353
+\float@exts=\toks54
+\float@box=\box68
+\@float@everytoks=\toks55
+\@floatcapt=\box69
 )
-(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/tools/xspace.sty
-Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+\@float@every@algorithm=\toks56
+\c@algorithm=\count354
 )
-(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/relsize/relsize.sty
-Package: relsize 2013/03/29 ver 4.1
+(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count355
+\c@ALG@rem=\count356
+\c@ALG@nested=\count357
+\ALG@tlm=\skip98
+\ALG@thistlm=\skip99
+\c@ALG@Lnr=\count358
+\c@ALG@blocknr=\count359
+\c@ALG@storecount=\count360
+\c@ALG@tmpcounter=\count361
+\ALG@tmplength=\skip100
 )
-\skiptotal=\skip99
-\skiplinenumber=\skip100
-\skiprule=\skip101
-\skiphlne=\skip102
-\skiptext=\skip103
-\skiplength=\skip104
-\algomargin=\skip105
-\skipalgocfslide=\skip106
-\algowidth=\dimen283
-\inoutsize=\dimen284
-\inoutindent=\dimen285
-\interspacetitleruled=\dimen286
-\interspacealgoruled=\dimen287
-\interspacetitleboxruled=\dimen288
-\algocf@ruledwidth=\skip107
-\algocf@inoutbox=\box68
-\algocf@inputbox=\box69
-\AlCapSkip=\skip108
-\AlCapHSkip=\skip109
-\algoskipindent=\skip110
-\algocf@nlbox=\box70
-\algocf@hangingbox=\box71
-\algocf@untilbox=\box72
-\algocf@skipuntil=\skip111
-\algocf@capbox=\box73
-\algocf@lcaptionbox=\skip112
-\algoheightruledefault=\skip113
-\algoheightrule=\skip114
-\algotitleheightruledefault=\skip115
-\algotitleheightrule=\skip116
-\c@algocfline=\count355
-\c@algocfproc=\count356
-\c@algocf=\count357
-\algocf@algoframe=\box74
-\algocf@algobox=\box75
-)
-(d:/soft/tex/texlive/2025/texmf-dist/tex/latex/base/latexsym.sty
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (d:/soft/tex/texlive/2025/texmf-dist/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 \symlasy=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
 )
-\c@currtheoremctr=\count358
-\c@endtheoremctr=\count359
-\c@theorem=\count360
-\c@currdefinitionctr=\count361
-\c@enddefinitionctr=\count362
-\c@definition=\count363
-\c@currlemmactr=\count364
-\c@endlemmactr=\count365
-\c@lemma=\count366
-\c@currcorollaryctr=\count367
-\c@endcorollaryctr=\count368
-\c@corollary=\count369
-\c@currpropositionctr=\count370
-\c@endpropositionctr=\count371
-\c@proposition=\count372
+\c@currdefinitionctr=\count362
+\c@enddefinitionctr=\count363
+\c@definition=\count364
+\c@currlemmactr=\count365
+\c@endlemmactr=\count366
+\c@currtheoremctr=\count367
+\c@endtheoremctr=\count368
+\c@currcorollaryctr=\count369
+\c@endcorollaryctr=\count370
+\c@currpropositionctr=\count371
+\c@endpropositionctr=\count372
 \c@currexamplectr=\count373
 \c@endexamplectr=\count374
-\c@example=\count375
-\c@currremarkctr=\count376
-\c@endremarkctr=\count377
-\c@remark=\count378
-\c@curraxiomctr=\count379
-\c@endaxiomctr=\count380
-\c@axiom=\count381
-\c@currconditionctr=\count382
-\c@endconditionctr=\count383
-\c@condition=\count384
-\c@currconclusionctr=\count385
-\c@endconclusionctr=\count386
-\c@conclusion=\count387
-\c@currassumptionctr=\count388
-\c@endassumptionctr=\count389
-\c@assumption=\count390
-\c@currproofctr=\count391
-\c@endproofctr=\count392
-\c@proof=\count393
+\c@currremarkctr=\count375
+\c@endremarkctr=\count376
+\c@curraxiomctr=\count377
+\c@endaxiomctr=\count378
+\c@currconditionctr=\count379
+\c@endconditionctr=\count380
+\c@currconclusionctr=\count381
+\c@endconclusionctr=\count382
+\c@currassumptionctr=\count383
+\c@endassumptionctr=\count384
+\c@currnotationctr=\count385
+\c@endnotationctr=\count386
+\c@currproofctr=\count387
+\c@endproofctr=\count388
+\c@proof=\count389
 
 (d:/soft/tex/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (d:/soft/tex/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen289
-\captionmargin=\dimen290
-\caption@leftmargin=\dimen291
-\caption@rightmargin=\dimen292
-\caption@width=\dimen293
-\caption@indent=\dimen294
-\caption@parindent=\dimen295
-\caption@hangindent=\dimen296
+\caption@tempdima=\dimen283
+\captionmargin=\dimen284
+\caption@leftmargin=\dimen285
+\caption@rightmargin=\dimen286
+\caption@width=\dimen287
+\caption@indent=\dimen288
+\caption@parindent=\dimen289
+\caption@hangindent=\dimen290
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count394
-\c@continuedfloat=\count395
+\c@caption@flags=\count390
+\c@continuedfloat=\count391
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
 
@@ -1067,46 +1041,46 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 (d:/soft/tex/texlive/2025/texmf-dist/tex/latex/tocloft/tocloft.sty
 Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
 Package tocloft Info: The document has chapter divisions on input line 51.
-\cftparskip=\skip117
-\cftbeforetoctitleskip=\skip118
-\cftaftertoctitleskip=\skip119
-\cftbeforepartskip=\skip120
-\cftpartnumwidth=\skip121
-\cftpartindent=\skip122
-\cftbeforechapskip=\skip123
-\cftchapindent=\skip124
-\cftchapnumwidth=\skip125
-\cftbeforesecskip=\skip126
-\cftsecindent=\skip127
-\cftsecnumwidth=\skip128
-\cftbeforesubsecskip=\skip129
-\cftsubsecindent=\skip130
-\cftsubsecnumwidth=\skip131
-\cftbeforesubsubsecskip=\skip132
-\cftsubsubsecindent=\skip133
-\cftsubsubsecnumwidth=\skip134
-\cftbeforeparaskip=\skip135
-\cftparaindent=\skip136
-\cftparanumwidth=\skip137
-\cftbeforesubparaskip=\skip138
-\cftsubparaindent=\skip139
-\cftsubparanumwidth=\skip140
-\cftbeforeloftitleskip=\skip141
-\cftafterloftitleskip=\skip142
-\cftbeforefigskip=\skip143
-\cftfigindent=\skip144
-\cftfignumwidth=\skip145
-\c@lofdepth=\count396
-\c@lotdepth=\count397
-\cftbeforelottitleskip=\skip146
-\cftafterlottitleskip=\skip147
-\cftbeforetabskip=\skip148
-\cfttabindent=\skip149
-\cfttabnumwidth=\skip150
+\cftparskip=\skip101
+\cftbeforetoctitleskip=\skip102
+\cftaftertoctitleskip=\skip103
+\cftbeforepartskip=\skip104
+\cftpartnumwidth=\skip105
+\cftpartindent=\skip106
+\cftbeforechapskip=\skip107
+\cftchapindent=\skip108
+\cftchapnumwidth=\skip109
+\cftbeforesecskip=\skip110
+\cftsecindent=\skip111
+\cftsecnumwidth=\skip112
+\cftbeforesubsecskip=\skip113
+\cftsubsecindent=\skip114
+\cftsubsecnumwidth=\skip115
+\cftbeforesubsubsecskip=\skip116
+\cftsubsubsecindent=\skip117
+\cftsubsubsecnumwidth=\skip118
+\cftbeforeparaskip=\skip119
+\cftparaindent=\skip120
+\cftparanumwidth=\skip121
+\cftbeforesubparaskip=\skip122
+\cftsubparaindent=\skip123
+\cftsubparanumwidth=\skip124
+\cftbeforeloftitleskip=\skip125
+\cftafterloftitleskip=\skip126
+\cftbeforefigskip=\skip127
+\cftfigindent=\skip128
+\cftfignumwidth=\skip129
+\c@lofdepth=\count392
+\c@lotdepth=\count393
+\cftbeforelottitleskip=\skip130
+\cftafterlottitleskip=\skip131
+\cftbeforetabskip=\skip132
+\cfttabindent=\skip133
+\cfttabnumwidth=\skip134
 )
 (d:/soft/tex/texlive/2025/texmf-dist/tex/latex/titlesec/titletoc.sty
 Package: titletoc 2025/01/04 v2.17 TOC entries
-\ttl@leftsep=\dimen297
+\ttl@leftsep=\dimen291
 ))
 (./main.aux (./includefile/frontmatter.aux) (./body/chapter1.aux)
 (./body/chapter2.aux) (./body/chapter3.aux) (./appendices.aux))
@@ -1339,11 +1313,6 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 21--21
  []
 
 
-Overfull \hbox (4.0pt too wide) in paragraph at lines 21--21
-[][]
- []
-
-
 
 [1
 
@@ -1355,15 +1324,6 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 21--21
 [1
 
 
-] (./main.toc)
-\tf@toc=\write4
-\openout4 = `main.toc'.
-
-
-
-[2
-
-
 ]
 \openout2 = `body/chapter1.aux'.
 
@@ -1372,6 +1332,8 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 21--21
 )
 
 [1
+
+
 
 
 
@@ -1402,16 +1364,27 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 21--21
 ] (./main.bbl)
 \openout2 = `appendices.aux'.
 
- (./appendices.tex)
+ (./appendices.tex
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
+nput line 20.
+Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
+input line 29.
+Package hyperref Info: bookmark level for unknown proof defaults to 0 on input 
+line 33.
+Package hyperref Info: bookmark level for unknown notation defaults to 0 on inp
+ut line 37.
+
 
 [4
 
 
 
 
-]
-\tf@thm=\write5
-\openout5 = `main.thm'.
+])
+
+[5]
+\tf@thm=\write4
+\openout4 = `main.thm'.
 
  (./main.aux (./includefile/frontmatter.aux) (./body/chapter1.aux)
 (./body/chapter2.aux) (./body/chapter3.aux) (./appendices.aux))
@@ -1419,16 +1392,23 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 21--21
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2022/07/14>
  ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E1B8D456CAA899F1865DA7831838FC56;469.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 5B71D5DDA42CE6CCD60D4AD9366CDD3F;486
+(rerunfilecheck)             After:  601A3D076187A80B977F481FD9E8D12F;431.
  ) 
 Here is how much of TeX's memory you used:
- 21415 strings out of 468457
- 442970 string characters out of 5445459
- 872922 words of memory out of 5000000
- 49472 multiletter control sequences out of 15000+600000
- 642480 words of font info for 153 fonts, out of 8000000 for 9000
+ 21149 strings out of 468457
+ 443529 string characters out of 5445459
+ 860957 words of memory out of 5000000
+ 49204 multiletter control sequences out of 15000+600000
+ 642496 words of font info for 155 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 107i,13n,125p,1170b,501s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 107i,13n,125p,1170b,556s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (7 pages).
