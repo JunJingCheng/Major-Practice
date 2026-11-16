@@ -1,0 +1,133 @@
+% !Mode:: "TeX:UTF-8"
+
+\chapter{基于依赖度的属性约简与规则提取算法设计}
+
+本章在第2章理论基础之上，针对WBC（威斯康星乳腺癌）数据集的特性，设计了一套完整的粗糙集数据处理与分析管线。首先介绍数据的离散化策略，随后详细阐述粗糙集核心算子的程序化实现，进而给出基于依赖度的核属性求解与启发式约简算法，最后定义并实现决策规则的提取方法，为第4章的实验分析奠定算法基础。
+
+\section{数据预处理与离散化}
+
+\subsection{缺失值处理}
+
+在实际的医疗数据集中，由于人工记录失误或设备原因，往往存在缺失值。WBC数据集的\texttt{Bare\_nuclei}属性中即包含部分缺失记录。为了保证粗糙集计算的有效性，本文采用直接剔除包含缺失值样本的策略。该逻辑在\texttt{preprocessing.py}的\texttt{del\_na\_row}函数中实现，处理后的数据集记为\texttt{NONA\_BCW\_PATH}。
+
+\subsection{连续属性的等宽离散化}
+
+经典Pawlak粗糙集基于严格的等价关系，只能处理离散属性。虽然WBC数据集的特征多为1至10的医学评分（具有一定离散性），但为了规范化算法流程，本文仍对其进行等宽分箱处理。
+
+\texttt{preprocessing.py}中实现了\texttt{foolish\_discretization}函数（基于等宽策略）。其核心逻辑为：计算目标属性的最大值与最小值，将值域等分为\(k\)个区间（本文默认\(k=5\)），并将每个样本值映射到对应区间的索引。等宽分箱的优点是实现简单且计算高效，能快速将连续或半连续数据转化为粗糙集所需的离散等价类。
+
+\section{粗糙集核心算子的程序化实现}
+
+在\texttt{reduction.py}中，本文封装了\texttt{RoughSetsReducer}类来管理决策系统。论域\(U\)（DataFrame格式）、条件属性集\(C\)与决策属性\(D\)作为类的核心成员。在此基础上，依次实现了以下四个底层算子：
+
+\begin{definition}[等价类划分 \texttt{equiv\_cls}]
+	对于给定的属性子集\(B \subseteq C\)，遍历论域\(U\)中的样本，根据样本在\(B\)中所有属性上的取值组合进行分组。返回一个字典，键为属性值组合，值为属于该等价类的样本索引集合。
+\end{definition}
+
+\begin{definition}[下近似 \texttt{under\_appr}]
+	计算特定决策类\(X\)在条件属性\(B\)下的下近似。对于\(B\)划分出的每个等价类，若其对应的样本索引集合完全包含于\(X\)，则将该等价类中的所有样本并入下近似集合。
+\end{definition}
+
+\begin{definition}[正域 \texttt{pos}]
+	根据决策属性\(D\)将论域划分为多个决策类\(D_i\)。对每一个\(D_i\)分别求其在\(B\)下的下近似，所有决策类下近似的并集即为正域\(POS_B(D)\)。
+\end{definition}
+
+\begin{definition}[依赖度 \texttt{gamma}]
+	条件属性子集\(B\)对决策属性\(D\)的依赖度定义为正域大小与论域大小之比：
+	\begin{equation}
+		\gamma_B(D) = \frac{|POS_B(D)|}{|U|}
+	\end{equation}
+	该值域为\([0, 1]\)，值越大说明条件属性对决策的区分能力越强。
+\end{definition}
+
+上述四个函数层层递进，构成了后续属性约简与规则提取的坚实底层基础。
+
+\section{基于依赖度的启发式属性约简算法}
+
+属性约简的目标是在保持分类能力（即依赖度）不变的前提下，剔除冗余的条件属性。由于求解最小约简是NP-hard问题，本文采用前向贪心启发式搜索。
+
+\subsection{核属性求解 (\texttt{core} 方法)}
+
+核属性是决策系统中不可或缺的特征。其判定准则为：若剔除属性\(a\)后，系统的依赖度下降，则\(a\)为核属性：
+\begin{equation}
+	\gamma_{C-\{a\}}(D) < \gamma_{C}(D)
+\end{equation}
+在代码实现中，算法遍历条件属性集\(C\)中的每一个属性，计算剔除该属性后的依赖度。若严格小于原始依赖度（加入\(1e-6\)的浮点容差防止精度误差），则将其加入核属性集合\(Core(C)\)。
+
+\subsection{基于依赖度增量的前向搜索 (\texttt{reduce} 方法)}
+
+以核属性为起点，算法通过贪心策略逐步扩充约简集，直到当前依赖度等于原始依赖度。具体流程如下：
+
+%\begin{breakablealgorithm}
+%	\caption{基于依赖度的前向启发式属性约简算法}
+%	\label{alg:reduction}
+%	\begin{algorithmic}[1]
+%		\Require 决策系统 \(S = \langle U, C \cup D, V, f \rangle\)
+%		\Ensure 约简属性集 \(Red\)
+%		\State \(Red \gets Core(C)\) \Comment{以核属性为起点}
+%		\State \(current\_gamma \gets \gamma_{Red}(D)\)
+%		\State \(target\_gamma \gets \gamma_C(D)\)
+%		\While{\(current\_gamma < target\_gamma - 1e-6\)}
+%		\State \(best\_attr \gets \text{None}\), \(max\_delta \gets -1\)
+%		\For{每个 \(a \in C \setminus Red\)}
+%		\State \(\Delta \gets \gamma_{Red \cup \{a\}}(D) - current\_gamma\)
+%		\If{\(\Delta > max\_delta\)}
+%		\State \(max\_delta \gets \Delta\), \(best\_attr \gets a\)
+%		\EndIf
+%		\EndFor
+%		\If{\(best\_attr \neq \text{None}\) \textbf{and} \(max\_delta > 1e-6\)}
+%		\State \(Red \gets Red \cup \{best\_attr\}\)
+%		\State \(current\_gamma \gets current\_gamma + max\_delta\)
+%		\Else
+%		\State \textbf{break} \Comment{无法继续提升依赖度，停止搜索}
+%		\EndIf
+%		\EndWhile
+%		\State \Return \(Red\)
+%	\end{algorithmic}
+%\end{breakablealgorithm}
+
+该算法有效避免了盲目搜索，每次迭代优先选择对分类能力贡献最大的属性，从而快速收敛至最小约简集。
+
+\subsection{基于等价类的规则提取算法}
+
+规则提取的本质是从约简后的决策表中，寻找条件属性与决策属性之间的强关联。为了避免遍历所有可能的属性组合（会导致指数级的时间复杂度），本文基于等价类划分来设计规则提取算法。
+
+具体而言，算法首先根据约简后的条件属性集 \(Red\) 将论域划分为若干个等价类。对于每一个等价类，统计其中各决策类的样本数。若某个决策类的样本数在该等价类中占绝对优势（即满足置信度阈值），且该等价类包含的样本数足够多（即满足支持度阈值），则将其归纳为一条 IF-THEN 规则。
+
+%\begin{breakablealgorithm}
+%	\caption{基于等价类的决策规则提取算法}
+%	\label{alg:rule_extraction}
+%	\begin{algorithmic}[1]
+%		\Require 约简后的决策系统 \(S' = \langle U, Red \cup D, V, f \rangle\)，最小支持度阈值 \(\alpha\)，最小置信度阈值 \(\beta\)
+%		\Ensure 高质量决策规则集合 \(Rules\)
+%		\State \(Rules \gets \emptyset\)
+%		\State \(Total \gets |U|\) \Comment{论域中的总样本数}
+%		\State 根据条件属性集 \(Red\) 对论域 \(U\) 进行等价类划分，得到划分 \(U/Red = \{E_1, E_2, \dots, E_m\}\)
+%		\For{每个等价类 \(E_i \in U/Red\)}
+%		\State \(Count_{E_i} \gets |E_i|\) \Comment{满足当前前件的样本总数}
+%		\State 统计 \(E_i\) 中不同决策属性值的分布，记出现频率最高的决策类为 \(d^*\)，其对应样本数为 \(Count_{E_i, d^*}\)
+%		\State \(Support \gets Count_{E_i, d^*} / Total\)
+%		\State \(Confidence \gets Count_{E_i, d^*} / Count_{E_i}\)
+%		\If{\(Support \ge \alpha\) \textbf{and} \(Confidence \ge \beta\)}
+%		\State 构造规则 \(R: \text{IF } (Red = f(E_i, Red)) \text{ THEN } (D = d^*)\)
+%		\State \(Rules \gets Rules \cup \{R\}\)
+%		\EndIf
+%		\EndFor
+%		\State \Return \(Rules\)
+%	\end{algorithmic}
+%\end{breakablealgorithm}
+
+该算法的时间复杂度主要取决于等价类划分的过程。设样本总数为 \(n\)，属性数为 \(k\)，单次划分的时间复杂度为 \(O(n \cdot k)\)。在最坏情况下，每个样本自成一个等价类，总时间复杂度为 \(O(n^2 \cdot k)\)；但在实际应用中（如WBC数据集），等价类数量远小于样本数，算法能够极其高效地运行。
+
+\subsection{基于分组统计的规则提取实现}
+
+在代码实现中，本文利用 \texttt{pandas} 的 \texttt{groupby} 机制高效完成规则提取：
+\begin{enumerate}
+	\item 按照约简后的全部条件属性进行分组，统计每个等价类对应不同决策值的样本频数。
+	\item 计算每一条规则的置信度（当前等价类频数 / 当前前件总样本数）和支持度（当前等价类频数 / 总样本数）。
+	\item 设定最小支持度阈值（如0.01）和最小置信度阈值（如0.9），过滤掉弱规则与噪声规则，保留高确定性的 IF-THEN 决策规则。
+\end{enumerate}
+
+\section{本章小结}
+
+本章针对WBC数据集设计了从预处理到规则提取的完整算法框架。依托\texttt{RoughSetsReducer}类实现了等价类、下近似、正域与依赖度的底层计算，并在此基础上完成了核属性判定与前向启发式属性约简算法。最后，基于支持度与置信度阈值，设计了基于分组统计的决策规则提取方法。第4章将展示这些算法在WBC数据集上的实际运行效果与医学解释。
