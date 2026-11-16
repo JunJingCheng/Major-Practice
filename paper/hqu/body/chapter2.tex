@@ -1,1 +1,137 @@
-\chapter{xxx}
+% !Mode:: "TeX:UTF-8"
+
+\chapter{粗糙集理论基础}
+
+本章主要介绍经典 Pawlak 粗糙集与模糊粗糙集的理论基础。首先给出信息系统与决策系统的基本定义，随后详细阐述经典粗糙集中的等价关系、上下近似、依赖度及属性约简等核心概念。针对经典粗糙集处理连续数据的局限性，进一步引入模糊逻辑基础与模糊粗糙集模型。
+
+\section{经典 Pawlak 粗糙集理论}
+
+经典粗糙集理论的核心思想是通过已知的知识库（等价关系）来逼近未知的、不精确的概念。其无需先验概率，完全依赖数据本身的不可区分性。
+
+\subsection{信息系统与不可区分关系}
+
+\begin{definition}[信息系统]
+	一个信息系统（Information System）通常形式化定义为一个四元组 \(S = \langle U, A, V, f \rangle\)，其中：
+	\begin{itemize}
+		\item \(U = \{x_1, x_2, \dots, x_n\}\) 是一个非空有限集合，称为论域（Universe），表示对象的集合。
+		\item \(A\) 是一个非空有限集合，称为属性集，表示对象特征的集合。
+		\item \(V = \bigcup_{a \in A} V_a\)，其中 \(V_a\) 是属性 \(a\) 的值域。
+		\item \(f: U \times A \to V\) 是一个信息函数，它为每个对象的每个属性赋予一个信息值，即对 \(\forall x \in U, a \in A\)，有 \(f(x, a) \in V_a\)。
+	\end{itemize}
+\end{definition}
+
+当属性集 \(A\) 可以进一步划分为条件属性集 \(C\) 和决策属性集 \(D\)（即 \(A = C \cup D\)，且 \(C \cap D = \emptyset\)）时，该信息系统被称为\textbf{决策系统}（Decision System），记为 \(S = \langle U, C \cup D, V, f \rangle\)。
+
+\begin{definition}[不可区分关系与等价类]
+	对于任意属性子集 \(B \subseteq A\)，定义论域 \(U\) 上的二元关系 \(IND(B)\)（即不可区分关系）如下：
+	\begin{equation}
+		IND(B) = \{ (x, y) \in U \times U \mid \forall a \in B, f(x, a) = f(y, a) \}
+	\end{equation}
+	显然，\(IND(B)\) 是一个等价关系。由 \(IND(B)\) 产生的论域划分记为 \(U/IND(B)\)（或简记为 \(U/B\)）。包含对象 \(x\) 的等价类记为 \([x]_B\)。
+\end{definition}
+
+\subsection{上下近似与正域}
+
+在给定等价关系 \(B\) 下，论域中的任意子集 \(X \subseteq U\) 可能无法被精确表达（即可能是多个等价类的并集，也可能只是等价类的一部分）。粗糙集通过上下近似来刻画这种不精确性。
+
+\begin{definition}[上下近似]
+	对于论域 \(U\) 的任意子集 \(X \subseteq U\) 和属性子集 \(B \subseteq A\)，\(X\) 关于 \(B\) 的\textbf{下近似}（Lower Approximation）和\textbf{上近似}（Upper Approximation）分别定义为：
+	\begin{equation}
+		\underline{B}(X) = \{ x \in U \mid [x]_B \subseteq X \}
+	\end{equation}
+	\begin{equation}
+		\overline{B}(X) = \{ x \in U \mid [x]_B \cap X \neq \emptyset \}
+	\end{equation}
+	下近似 \(\underline{B}(X)\) 表示根据知识 \(B\) 肯定属于 \(X\) 的对象集合；上近似 \(\overline{B}(X)\) 表示根据知识 \(B\) 可能属于 \(X\) 的对象集合。
+\end{definition}
+
+由此，可进一步定义 \(X\) 的\textbf{正域}（Positive Region）、\textbf{负域}（Negative Region）和\textbf{边界域}（Boundary Region）：
+\begin{align}
+	POS_B(X) &= \underline{B}(X) \\
+	NEG_B(X) &= U - \overline{B}(X) \\
+	BND_B(X) &= \overline{B}(X) - \underline{B}(X)
+\end{align}
+边界域 \(BND_B(X)\) 反映了知识 \(B\) 在判断对象归属时的“不确定性”或“模糊性”。如果 \(BND_B(X) = \emptyset\)，则 \(X\) 是可定义的（精确的）；否则 \(X\) 是粗糙的。
+
+在决策系统中，设决策属性 \(D\) 将论域划分为 \(n\) 个决策类 \(D_1, D_2, \dots, D_n\)，则条件属性 \(C\) 相对于 \(D\) 的正域定义为：
+\begin{equation}
+	POS_C(D) = \bigcup_{i=1}^{n} \underline{C}(D_i)
+\end{equation}
+
+\subsection{属性依赖度与重要性}
+
+依赖度用于衡量条件属性对决策属性的区分能力。
+
+\begin{definition}[依赖度]
+	设 \(S = \langle U, C \cup D, V, f \rangle\) 为决策系统，条件属性集 \(C\) 对决策属性集 \(D\) 的\textbf{依赖度}（Dependency Degree）定义为：
+	\begin{equation}
+		\gamma_C(D) = \frac{|POS_C(D)|}{|U|}
+	\end{equation}
+	其中 \(|\cdot|\) 表示集合的基数（元素个数）。显然 \(0 \le \gamma_C(D) \le 1\)。
+\end{definition}
+
+\(\gamma_C(D) = 1\) 表示决策属性完全依赖于条件属性 \(C\)；\(\gamma_C(D) = 0\) 表示两者完全不相关。如果对于属性 \(a \in C\)，有 \(\gamma_{C}(D) = \gamma_{C-\{a\}}(D)\)，则说明属性 \(a\) 对于决策 \(D\) 是冗余的。
+
+\subsection{属性约简与核}
+
+属性约简（Attribute Reduction）是粗糙集理论的核心应用之一，其目的是在保持决策系统分类能力（即依赖度不变）的前提下，剔除冗余属性，寻找最小属性子集。
+
+\begin{definition}[属性约简与核]
+	设 \(B \subseteq C\)，如果满足：
+	\begin{enumerate}
+		\item \(\gamma_B(D) = \gamma_C(D)\)（充分性条件）
+		\item 对于任意 \(a \in B\)，\(\gamma_{B-\{a\}}(D) < \gamma_B(D)\)（独立性条件）
+	\end{enumerate}
+	则称 \(B\) 是 \(C\) 相对于 \(D\) 的一个\textbf{约简}（Reduct）。
+	决策系统中所有约简的交集称为\textbf{核}（Core），记为 \(Core(C)\)。
+\end{definition}
+核是决策系统中绝对不能剔除的特征集合。在实际算法中，通常先求出核作为起点，然后通过启发式搜索（如基于依赖度增量）逐步添加重要属性，直至满足分类能力，从而求得约简。
+
+\section{模糊粗糙集基础}
+
+经典粗糙集依赖于严格的等价关系，难以直接处理连续数值属性。虽然可以采用离散化，但往往会导致信息损失。为提升模型的鲁棒性并直接处理数值数据，Dubois 和 Prade 引入了模糊集理论，提出了模糊粗糙集（Fuzzy Rough Sets）。
+
+\subsection{模糊逻辑算子}
+模糊逻辑通过 \([0, 1]\) 区间上的隶属度来刻画对象属于某个集合的程度。构建模糊粗糙集需要依赖以下几种基础算子：
+
+\begin{definition}[三角范数与三角余范数]
+	一个映射 \(T: [0,1]^2 \to [0,1]\) 如果满足交换律、结合律、单调性以及边界条件 \(T(x,1)=x\)，则称为\textbf{三角范数}（T-norm，用于模糊交集）。
+	常见的有：最小值算子 \(T_M(x,y) = \min(x,y)\)，乘积算子 \(T_P(x,y) = x \cdot y\)。
+	同理，映射 \(S: [0,1]^2 \to [0,1]\) 满足相应条件且边界为 \(S(x,0)=x\) 时，称为\textbf{三角余范数}（T-conorm，用于模糊并集）。
+\end{definition}
+
+\begin{definition}[模糊蕴含算子]
+	一个映射 \(\theta: [0,1]^2 \to [0,1]\) 如果满足关于第一个变量单调递减，关于第二个变量单调递增，且 \(\theta(0,0)=\theta(0,1)=\theta(1,1)=1\) 及 \(\theta(1,0)=0\)，则称为\textbf{模糊蕴含算子}。
+	最常用的是 Residuated 蕴含算子：\(\theta_T(x,y) = \sup\{z \in [0,1] \mid T(x,z) \le y\}\)。
+\end{definition}
+
+\subsection{模糊等价关系与模糊粗糙集}
+
+将经典等价关系推广到模糊环境，即得到模糊等价关系。
+
+\begin{definition}[模糊等价关系]
+	论域 \(U\) 上的一个模糊关系 \(R \in \mathcal{F}(U \times U)\) 如果满足：
+	\begin{enumerate}
+		\item 自反性：\(\forall x \in U, R(x,x) = 1\)
+		\item 对称性：\(\forall x, y \in U, R(x,y) = R(y,x)\)
+		\item T-传递性：\(\forall x, y, z \in U, T(R(x,y), R(y,z)) \le R(x,z)\)
+	\end{enumerate}
+	则称 \(R\) 为一个\textbf{模糊等价关系}（或模糊 T-等价关系）。
+\end{definition}
+
+在模糊等价关系的基础上，任意模糊集合 \(Y \in \mathcal{F}(U)\)（即目标概念）关于 \(R\) 的模糊上下近似可定义如下：
+
+\begin{definition}[模糊上下近似]
+	设 \(R\) 是 \(U\) 上的模糊 T-等价关系，对于任意模糊集合 \(Y\)，其基于三角范数 \(T\) 和模糊蕴含算子 \(\theta\) 的\textbf{模糊下近似} \(R_{\downarrow}Y\) 与\textbf{模糊上近似} \(R^{\uparrow}Y\) 定义为：
+	\begin{align}
+		(R_{\downarrow}Y)(x) &= \inf_{u \in U} \theta(R(x,u), Y(u)) \\
+		(R^{\uparrow}Y)(x) &= \sup_{u \in U} T(R(x,u), Y(u))
+	\end{align}
+	其中 \(x \in U\)。模糊下近似刻画了对象 \(x\) 确定属于 \(Y\) 的程度，上近似刻画了 \(x\) 可能属于 \(Y\) 的程度。
+\end{definition}
+
+与传统 Pawlak 粗糙集通过正域计算依赖度类似，模糊粗糙集利用模糊正域来度量条件属性与决策属性之间的依赖关系。由于模糊粗糙集直接使用样本间的距离度量（蕴含在模糊等价关系 \(R\) 中），因此无需对连续数据进行离散化，极大地保留了原始信息，且在应对分类噪声时具有更高的鲁棒性。
+
+\section{本章小结}
+
+本章系统梳理了粗糙集理论的两大核心体系。首先，介绍了经典 Pawlak 粗糙集的数学基础，包括信息系统、等价关系、上下近似、正域以及基于依赖度的属性约简机制。随后，针对经典粗糙集必须进行离散化处理的缺陷，引入了模糊逻辑的基础算子（T-范数、模糊蕴含等）和模糊等价关系，并给出了模糊粗糙集的上下近似定义。这为后续章节设计基于依赖度的启发式属性约简算法，以及在 WBC 数据集上的对比实验奠定了坚实的理论基础。
